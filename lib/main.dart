@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/src/widgets/pokemon_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/src/repository/pokemon_repository.dart';
+import 'package:pokedex/src/screens/main.screen.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() {
+  return BlocOverrides.runZoned(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      final pokemonRepository = PokemonRepository();
+      runApp(MyApp(pokemonRepository: pokemonRepository));
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({
+    Key? key,
+    required PokemonRepository pokemonRepository,
+  })  : _pokemonRepository = pokemonRepository,
+        super(key: key);
 
-  // This widget is the root of your application.
+  final PokemonRepository _pokemonRepository;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokedex',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return RepositoryProvider.value(
+      value: _pokemonRepository,
+      child: MaterialApp(
+        title: 'Pokedex',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MainScreen(),
       ),
-      home: Scaffold(appBar: AppBar(), body: const PokemonCard()),
     );
   }
 }

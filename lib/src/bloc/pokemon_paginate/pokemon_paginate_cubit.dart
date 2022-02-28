@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import 'package:pokedex/src/model/main.dart';
 import 'package:pokedex/src/repository/pokemon_repository.dart';
 
@@ -12,17 +11,24 @@ class PokemonPaginateCubit extends Cubit<PokemonPaginateState> {
 
   final PokemonRepository _pokemonRepository;
 
-  void getPokemonPage(int limit, int offset) async {
+  void getPokemonPage(int limit) async {
+    if (state.isLoadingMore) return;
+    if (!state.hasMore) return;
     emit(state.copyWith(isLoadingMore: true));
     final pagination = await _pokemonRepository.getPokemonList(
       limit: limit,
-      offset: offset,
+      offset: state.currentOffset,
     );
     final currentPokemonList = state.pokemonList;
     final newPokemonList = [
       ...currentPokemonList,
       ...pagination.results,
     ];
-    emit(state.copyWith(isLoadingMore: false, pokemonList: newPokemonList));
+    emit(state.copyWith(
+      isLoadingMore: false,
+      pokemonList: newPokemonList,
+      currentOffset: newPokemonList.length,
+      hasMore: pagination.next != null,
+    ));
   }
 }

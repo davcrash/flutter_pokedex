@@ -2,8 +2,8 @@ import 'package:http/http.dart' as http;
 import 'package:pokedex/src/model/main.dart';
 
 class PokemonApi {
-  final _apiURL = "https://pokeapi.co/api/v2";
-  final _pokemonEndpoint = "/pokemon";
+  final _apiURL = "pokeapi.co";
+  final _pokemonEndpoint = "/api/v2/pokemon";
   final http.Client _httpClient;
 
   PokemonApi({
@@ -14,10 +14,10 @@ class PokemonApi {
     int limit = 10,
     int offset = 0,
   }) async {
-    final uri = Uri.http(
+    final uri = Uri.https(
       _apiURL,
       _pokemonEndpoint,
-      {'limit': limit, 'offset': offset},
+      {'limit': limit.toString(), 'offset': offset.toString()},
     );
 
     final response = await _httpClient.get(uri);

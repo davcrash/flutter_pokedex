@@ -9,7 +9,7 @@ class Pagination {
   });
 
   int count;
-  String next;
+  String? next;
   dynamic previous;
   List<PokemonPaginationResult> results;
 
@@ -23,7 +23,10 @@ class Pagination {
         next: json["next"],
         previous: json["previous"],
         results: List<PokemonPaginationResult>.from(
-            json["results"].map((x) => PokemonPaginationResult.fromJson(x))),
+          json["results"].map(
+            (x) => PokemonPaginationResult.fromJson(x),
+          ),
+        ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,11 +40,13 @@ class Pagination {
 class PokemonPaginationResult {
   PokemonPaginationResult({
     required this.name,
+    required this.number,
     required this.url,
     required this.imageUrl,
   });
 
   String name;
+  String number;
   String url;
   String imageUrl;
 
@@ -52,13 +57,21 @@ class PokemonPaginationResult {
 
   factory PokemonPaginationResult.fromJson(Map<String, dynamic> json) {
     final String url = json["url"];
-    final pokemonNumber = url.split("/").last;
+    final splitUrl = url.split("/");
+    final pokemonNumber = "000${splitUrl[splitUrl.length - 2]}";
+    final pokemonNumberWithZeros =
+        pokemonNumber.substring(pokemonNumber.length - 3, pokemonNumber.length);
     final pokemonDefaultImage =
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$pokemonNumber.png";
+        'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/$pokemonNumberWithZeros.png';
+
+    final pokemonImage =
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${splitUrl[splitUrl.length - 2]}.png";
+
     return PokemonPaginationResult(
       name: json["name"],
+      number: pokemonNumberWithZeros,
       url: url,
-      imageUrl: pokemonDefaultImage,
+      imageUrl: pokemonImage,
     );
   }
 
