@@ -25,4 +25,11 @@ class PokemonApi {
 
     return pagination;
   }
+
+  Future<Pokemon> getPokemon(int id) async {
+    final uri = Uri.https(_apiURL, "$_pokemonEndpoint/$id");
+    final response = await _httpClient.get(uri);
+    final pokemon = Pokemon.fromRawJson(response.body);
+    return pokemon;
+  }
 }

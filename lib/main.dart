@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/src/repository/pokemon_repository.dart';
 import 'package:pokedex/src/screens/main.screen.dart';
 
@@ -28,7 +29,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Pokedex',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
+          textTheme: GoogleFonts.tekoTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
         home: const MainScreen(),
       ),

@@ -13,4 +13,8 @@ class PokemonRepository {
   }) async {
     return await _pokemonApi.getPokemonList(limit: limit, offset: offset);
   }
+
+  Future<Pokemon> getPokemon(int id) async {
+    return await _pokemonApi.getPokemon(id);
+  }
 }

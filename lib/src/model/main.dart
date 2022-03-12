@@ -1,5 +1,28 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
+final typeColors = {
+  'normal': Colors.grey,
+  'fire': Colors.red,
+  'water': Colors.blue,
+  'electric': Colors.yellow[600],
+  'grass': Colors.green,
+  'ice': Colors.blue[200],
+  'fighting': Colors.brown[200],
+  'poison': Colors.purple,
+  'ground': Colors.yellow[800],
+  'flying': Colors.teal,
+  'psychic': Colors.pink[200],
+  'bug': Colors.green[400],
+  'rock': Colors.blueGrey[800],
+  'ghost': Colors.indigo,
+  'dragon': Colors.indigo[400],
+  'dark': Colors.grey,
+  'steel': Colors.blueGrey[600],
+  'fairy': Colors.pink[100],
+};
+
 class Pagination {
   Pagination({
     required this.count,
@@ -58,18 +81,24 @@ class PokemonPaginationResult {
   factory PokemonPaginationResult.fromJson(Map<String, dynamic> json) {
     final String url = json["url"];
     final splitUrl = url.split("/");
-    final pokemonNumber = "000${splitUrl[splitUrl.length - 2]}";
-    final pokemonNumberWithZeros =
-        pokemonNumber.substring(pokemonNumber.length - 3, pokemonNumber.length);
+    final pokemonNumber = splitUrl[splitUrl.length - 2];
+    final pokemonNumberWithZeros = "000$pokemonNumber";
+    final realPokemonNumber = pokemonNumber.length >= 5
+        ? pokemonNumber
+        : pokemonNumberWithZeros.substring(
+            pokemonNumberWithZeros.length - 3, pokemonNumberWithZeros.length);
+
+    /* 
     final pokemonDefaultImage =
-        'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/$pokemonNumberWithZeros.png';
+        'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/$pokemonNumberWithZeros.png'; 
+    */
 
     final pokemonImage =
         "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${splitUrl[splitUrl.length - 2]}.png";
 
     return PokemonPaginationResult(
       name: json["name"],
-      number: pokemonNumberWithZeros,
+      number: realPokemonNumber,
       url: url,
       imageUrl: pokemonImage,
     );
@@ -106,7 +135,7 @@ class Pokemon {
 
   List<Ability>? abilities;
   int? baseExperience;
-  List<Species>? forms;
+  List<NameAndUrl>? forms;
   List<GameIndex>? gameIndices;
   int? height;
   List<dynamic>? heldItems;
@@ -117,7 +146,7 @@ class Pokemon {
   String? name;
   int? order;
   List<dynamic>? pastTypes;
-  Species? species;
+  NameAndUrl? species;
   Sprites? sprites;
   List<Stat>? stats;
   List<Type>? types;
@@ -131,8 +160,8 @@ class Pokemon {
         abilities: List<Ability>.from(
             json["abilities"].map((x) => Ability.fromJson(x))),
         baseExperience: json["base_experience"],
-        forms:
-            List<Species>.from(json["forms"].map((x) => Species.fromJson(x))),
+        forms: List<NameAndUrl>.from(
+            json["forms"].map((x) => NameAndUrl.fromJson(x))),
         gameIndices: List<GameIndex>.from(
             json["game_indices"].map((x) => GameIndex.fromJson(x))),
         height: json["height"],
@@ -144,7 +173,7 @@ class Pokemon {
         name: json["name"],
         order: json["order"],
         pastTypes: List<dynamic>.from(json["past_types"].map((x) => x)),
-        species: Species.fromJson(json["species"]),
+        species: NameAndUrl.fromJson(json["species"]),
         sprites: Sprites.fromJson(json["sprites"]),
         stats: List<Stat>.from(json["stats"].map((x) => Stat.fromJson(x))),
         types: List<Type>.from(json["types"].map((x) => Type.fromJson(x))),
@@ -180,7 +209,7 @@ class Ability {
     this.slot,
   });
 
-  Species? ability;
+  NameAndUrl? ability;
   bool? isHidden;
   int? slot;
 
@@ -189,7 +218,7 @@ class Ability {
   String toRawJson() => json.encode(toJson());
 
   factory Ability.fromJson(Map<String, dynamic> json) => Ability(
-        ability: Species.fromJson(json["ability"]),
+        ability: NameAndUrl.fromJson(json["ability"]),
         isHidden: json["is_hidden"],
         slot: json["slot"],
       );
@@ -201,8 +230,8 @@ class Ability {
       };
 }
 
-class Species {
-  Species({
+class NameAndUrl {
+  NameAndUrl({
     this.name,
     this.url,
   });
@@ -210,11 +239,12 @@ class Species {
   String? name;
   String? url;
 
-  factory Species.fromRawJson(String str) => Species.fromJson(json.decode(str));
+  factory NameAndUrl.fromRawJson(String str) =>
+      NameAndUrl.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Species.fromJson(Map<String, dynamic> json) => Species(
+  factory NameAndUrl.fromJson(Map<String, dynamic> json) => NameAndUrl(
         name: json["name"],
         url: json["url"],
       );
@@ -232,7 +262,7 @@ class GameIndex {
   });
 
   int? gameIndex;
-  Species? version;
+  NameAndUrl? version;
 
   factory GameIndex.fromRawJson(String str) =>
       GameIndex.fromJson(json.decode(str));
@@ -241,7 +271,7 @@ class GameIndex {
 
   factory GameIndex.fromJson(Map<String, dynamic> json) => GameIndex(
         gameIndex: json["game_index"],
-        version: Species.fromJson(json["version"]),
+        version: NameAndUrl.fromJson(json["version"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -256,7 +286,7 @@ class Move {
     this.versionGroupDetails,
   });
 
-  Species? move;
+  NameAndUrl? move;
   List<VersionGroupDetail>? versionGroupDetails;
 
   factory Move.fromRawJson(String str) => Move.fromJson(json.decode(str));
@@ -264,7 +294,7 @@ class Move {
   String toRawJson() => json.encode(toJson());
 
   factory Move.fromJson(Map<String, dynamic> json) => Move(
-        move: Species.fromJson(json["move"]),
+        move: NameAndUrl.fromJson(json["move"]),
         versionGroupDetails: List<VersionGroupDetail>.from(
             json["version_group_details"]
                 .map((x) => VersionGroupDetail.fromJson(x))),
@@ -285,8 +315,8 @@ class VersionGroupDetail {
   });
 
   int? levelLearnedAt;
-  Species? moveLearnMethod;
-  Species? versionGroup;
+  NameAndUrl? moveLearnMethod;
+  NameAndUrl? versionGroup;
 
   factory VersionGroupDetail.fromRawJson(String str) =>
       VersionGroupDetail.fromJson(json.decode(str));
@@ -296,8 +326,8 @@ class VersionGroupDetail {
   factory VersionGroupDetail.fromJson(Map<String, dynamic> json) =>
       VersionGroupDetail(
         levelLearnedAt: json["level_learned_at"],
-        moveLearnMethod: Species.fromJson(json["move_learn_method"]),
-        versionGroup: Species.fromJson(json["version_group"]),
+        moveLearnMethod: NameAndUrl.fromJson(json["move_learn_method"]),
+        versionGroup: NameAndUrl.fromJson(json["version_group"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -863,7 +893,7 @@ class Stat {
 
   int? baseStat;
   int? effort;
-  Species? stat;
+  NameAndUrl? stat;
 
   factory Stat.fromRawJson(String str) => Stat.fromJson(json.decode(str));
 
@@ -872,7 +902,7 @@ class Stat {
   factory Stat.fromJson(Map<String, dynamic> json) => Stat(
         baseStat: json["base_stat"],
         effort: json["effort"],
-        stat: Species.fromJson(json["stat"]),
+        stat: NameAndUrl.fromJson(json["stat"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -889,7 +919,7 @@ class Type {
   });
 
   int? slot;
-  Species? type;
+  NameAndUrl? type;
 
   factory Type.fromRawJson(String str) => Type.fromJson(json.decode(str));
 
@@ -897,7 +927,7 @@ class Type {
 
   factory Type.fromJson(Map<String, dynamic> json) => Type(
         slot: json["slot"],
-        type: Species.fromJson(json["type"]),
+        type: NameAndUrl.fromJson(json["type"]),
       );
 
   Map<String, dynamic> toJson() => {

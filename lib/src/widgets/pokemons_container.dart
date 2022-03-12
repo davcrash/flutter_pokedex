@@ -38,10 +38,12 @@ class _PokemonsContainerState extends State<PokemonsContainer> {
     return BlocBuilder<PokemonPaginateCubit, PokemonPaginateState>(
       builder: (context, state) {
         return GridView.builder(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: widget.columnCount,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: .9,
           ),
           itemBuilder: (BuildContext context, int i) {
             return PokemonCard(
