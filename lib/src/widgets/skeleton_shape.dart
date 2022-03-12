@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeleton_text/skeleton_text.dart';
 
 class SkeletonShape extends StatelessWidget {
   const SkeletonShape({
@@ -13,13 +14,15 @@ class SkeletonShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.disabledColor,
-        borderRadius: BorderRadius.circular(5),
+    return SkeletonAnimation(
+      child: Container(
+        decoration: BoxDecoration(
+          color: theme.disabledColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        height: height,
+        width: width,
       ),
-      height: height,
-      width: width,
     );
   }
 }
