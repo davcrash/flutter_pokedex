@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/src/bloc/pokemon_paginate/pokemon_paginate_cubit.dart';
 import 'package:pokedex/src/widgets/pokemon_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/src/widgets/pokemon_card_skeleton.dart';
 
 class PokemonsContainer extends StatefulWidget {
   const PokemonsContainer({
@@ -46,11 +47,16 @@ class _PokemonsContainerState extends State<PokemonsContainer> {
             childAspectRatio: .9,
           ),
           itemBuilder: (BuildContext context, int i) {
-            return PokemonCard(
-              pokemonPaginationResult: state.pokemonList[i],
-            );
+            if (i < state.pokemonList.length) {
+              return PokemonCard(
+                pokemonPaginationResult: state.pokemonList[i],
+              );
+            }
+            return const PokemonCardSkeleton();
           },
-          itemCount: state.pokemonList.length,
+          itemCount: state.isLoadingMore
+              ? state.pokemonList.length + widget.maxCards - 1
+              : state.pokemonList.length,
           controller: _scrollController,
         );
       },

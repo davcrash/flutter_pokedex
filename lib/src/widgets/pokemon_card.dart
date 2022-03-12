@@ -11,6 +11,7 @@ class PokemonCard extends StatelessWidget {
   }) : super(key: key);
 
   final PokemonPaginationResult pokemonPaginationResult;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -37,8 +38,9 @@ class PokemonCard extends StatelessWidget {
                   scale: 1.2,
                   child: CachedNetworkImage(
                     imageUrl: pokemonPaginationResult.imageUrl,
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.warning),
+                    errorWidget: (context, url, error) => const Image(
+                      image: AssetImage('assets/failed_pokemon.png'),
+                    ),
                   ),
                 ),
               ),
