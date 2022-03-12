@@ -29,11 +29,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Pokedex',
         theme: ThemeData(
-          primarySwatch: Colors.red,
-          textTheme: GoogleFonts.tekoTextTheme(
-            Theme.of(context).textTheme,
-          ),
-        ),
+            primarySwatch: Colors.red,
+            textTheme: GoogleFonts.tekoTextTheme(
+              Theme.of(context).textTheme,
+            ),
+            appBarTheme: AppBarTheme(
+              titleTextStyle: GoogleFonts.teko(),
+              toolbarTextStyle: GoogleFonts.teko(),
+            )),
         home: const MainScreen(),
       ),
     );

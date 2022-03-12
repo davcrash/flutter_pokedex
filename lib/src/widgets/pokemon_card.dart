@@ -50,18 +50,16 @@ class PokemonCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
                     "No. ${pokemonPaginationResult.number}",
-                    style: GoogleFonts.teko(
-                      height: 0,
-                      color: Theme.of(context).textTheme.caption?.color,
-                    ),
+                    style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                          height: 0,
+                          color: Theme.of(context).textTheme.caption?.color,
+                        ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Text(
                   "${pokemonPaginationResult.name[0].toUpperCase()}${pokemonPaginationResult.name.substring(1)}",
-                  style: GoogleFonts.teko(
-                    textStyle: Theme.of(context).textTheme.headline6,
-                  ),
+                  style: Theme.of(context).textTheme.headline6,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

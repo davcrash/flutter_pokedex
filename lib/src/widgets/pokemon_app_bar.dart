@@ -28,7 +28,10 @@ class PokemonAppBar extends StatelessWidget {
             title: Text(
               "${pokemonPaginationResult.name[0].toUpperCase()}${pokemonPaginationResult.name.substring(1)}",
               //TODO: cambiar todo google fonts
-              style: GoogleFonts.teko(height: .8),
+              style: Theme.of(context)
+                  .appBarTheme
+                  .titleTextStyle!
+                  .copyWith(height: .8),
               overflow: TextOverflow.ellipsis,
             ),
             background: Container(
