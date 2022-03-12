@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../bloc/pokemon_details/pokemon_details_cubit.dart';
 import '../model/main.dart';
@@ -27,7 +26,6 @@ class PokemonAppBar extends StatelessWidget {
             centerTitle: true,
             title: Text(
               "${pokemonPaginationResult.name[0].toUpperCase()}${pokemonPaginationResult.name.substring(1)}",
-              //TODO: cambiar todo google fonts
               style: Theme.of(context)
                   .appBarTheme
                   .titleTextStyle!
