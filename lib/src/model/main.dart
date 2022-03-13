@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 final typeColors = {
   'normal': Colors.grey,
-  'fire': Colors.red,
+  'fire': Colors.red[600],
   'water': Colors.blue,
   'electric': Colors.yellow[600],
   'grass': Colors.green,
