@@ -77,10 +77,9 @@ class _PokemonAppBarState extends State<PokemonAppBar>
                     scale: 3.5,
                     child: CachedNetworkImage(
                       imageUrl: widget.pokemonPaginationResult.imageUrl,
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.warning),
+                      errorWidget: (context, url, error) => const Image(
+                        image: AssetImage('assets/failed_pokemon.png'),
+                      ),
                     ),
                   ),
                 ),
