@@ -58,7 +58,7 @@ class _PokemonAppBarState extends State<PokemonAppBar>
           child: FlexibleSpaceBar(
             centerTitle: true,
             title: Text(
-              "${widget.pokemonPaginationResult.name[0].toUpperCase()}${widget.pokemonPaginationResult.name.substring(1)}",
+              "No. ${widget.pokemonPaginationResult.number} ${widget.pokemonPaginationResult.name[0].toUpperCase()}${widget.pokemonPaginationResult.name.substring(1)}",
               style: theme.appBarTheme.titleTextStyle!.copyWith(height: .8),
               overflow: TextOverflow.ellipsis,
             ),
