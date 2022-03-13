@@ -15,10 +15,10 @@ final typeColors = {
   'flying': Colors.teal,
   'psychic': Colors.pink[200],
   'bug': Colors.green[400],
-  'rock': Colors.blueGrey[800],
+  'rock': Colors.grey[700],
   'ghost': Colors.indigo,
   'dragon': Colors.indigo[400],
-  'dark': Colors.grey,
+  'dark': Colors.blueGrey[800],
   'steel': Colors.blueGrey[600],
   'fairy': Colors.pink[100],
 };

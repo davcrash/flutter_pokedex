@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   final PokemonRepository _pokemonRepository;
   @override
   Widget build(BuildContext context) {
+    //TODO: responsive padding
     return RepositoryProvider.value(
       value: _pokemonRepository,
       child: MaterialApp(
