@@ -95,7 +95,10 @@ class _PokemonStatsState extends State<PokemonStats>
                           );
                         },
                       ),
-                      Text("${widget.stats[i].baseStat}"),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5.0),
+                        child: Text("${widget.stats[i].baseStat}"),
+                      ),
                     ],
                   ),
                 ),
