@@ -6,7 +6,7 @@ final typeColors = {
   'normal': Colors.grey,
   'fire': Colors.red[600],
   'water': Colors.blue,
-  'electric': Colors.yellow[600],
+  'electric': Colors.yellow[700],
   'grass': Colors.green,
   'ice': Colors.blue[200],
   'fighting': Colors.brown[200],
