@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/src/model/main.dart';
-
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import '../screens/pokemon_details.screen.dart';
 
 class PokemonCard extends StatelessWidget {
@@ -59,7 +59,7 @@ class PokemonCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${pokemonPaginationResult.name[0].toUpperCase()}${pokemonPaginationResult.name.substring(1)}",
+                  "${toBeginningOfSentenceCase(pokemonPaginationResult.name)}",
                   style: Theme.of(context).textTheme.headline6,
                   overflow: TextOverflow.ellipsis,
                 ),

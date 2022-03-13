@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 import '../bloc/pokemon_details/pokemon_details_cubit.dart';
 import '../model/main.dart';
 
@@ -58,7 +58,7 @@ class _PokemonAppBarState extends State<PokemonAppBar>
           child: FlexibleSpaceBar(
             centerTitle: true,
             title: Text(
-              "No. ${widget.pokemonPaginationResult.number} ${widget.pokemonPaginationResult.name[0].toUpperCase()}${widget.pokemonPaginationResult.name.substring(1)}",
+              "No. ${widget.pokemonPaginationResult.number} ${toBeginningOfSentenceCase(widget.pokemonPaginationResult.name)}",
               style: theme.appBarTheme.titleTextStyle!.copyWith(height: .8),
               overflow: TextOverflow.ellipsis,
             ),
