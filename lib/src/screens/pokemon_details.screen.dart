@@ -6,6 +6,7 @@ import '../model/main.dart';
 import '../repository/pokemon_repository.dart';
 import '../widgets/pokemon_app_bar.dart';
 import '../widgets/pokemon_details.dart';
+import '../widgets/pokemon_stats.dart';
 
 class PokemonDetailsScreen extends StatelessWidget {
   const PokemonDetailsScreen({
@@ -27,17 +28,13 @@ class PokemonDetailsScreen extends StatelessWidget {
               pokemonPaginationResult: pokemonPaginationResult,
             ),
             SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  if (index == 0) {
-                    return const PokemonDetails();
-                  }
-                  return Container(
-                    color: index.isOdd ? Colors.white : Colors.black12,
-                    height: 100.0,
-                  );
-                },
-                childCount: 20,
+              delegate: SliverChildListDelegate(
+                [
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  const PokemonDetails(),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  const PokemonStats()
+                ],
               ),
             ),
           ],
