@@ -9,10 +9,12 @@ class PokemonsContainer extends StatefulWidget {
     Key? key,
     required this.columnCount,
     required this.maxCards,
+    this.isDesktop = false,
   }) : super(key: key);
 
   final int columnCount;
   final int maxCards;
+  final bool isDesktop;
   @override
   State<PokemonsContainer> createState() => _PokemonsContainerState();
 }
@@ -39,7 +41,10 @@ class _PokemonsContainerState extends State<PokemonsContainer> {
     return BlocBuilder<PokemonPaginateCubit, PokemonPaginateState>(
       builder: (context, state) {
         return GridView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: EdgeInsets.symmetric(
+            vertical: 10,
+            horizontal: 10 + (widget.isDesktop ? 100 : 0),
+          ),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: widget.columnCount,
             crossAxisSpacing: 10,

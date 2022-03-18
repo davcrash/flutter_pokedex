@@ -4,6 +4,7 @@ import 'package:pokedex/src/bloc/pokemon_paginate/pokemon_paginate_cubit.dart';
 import 'package:pokedex/src/repository/pokemon_repository.dart';
 import 'package:pokedex/src/widgets/pokemons_container.dart';
 
+import '../responsive/responsive_layout.dart';
 import '../widgets/pokeball.dart';
 
 class MainScreen extends StatelessWidget {
@@ -12,13 +13,14 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final width = size.width;
+    const widthCard = 150.0;
+    const heightCard = 150.0;
+    final width = size.width < maxMobileWidth ? size.width : size.width - 200;
     final height = size.height;
-    const widthCard = 150;
-    const heightCard = 150;
     final columnCount = width ~/ widthCard;
     final maxRow = height ~/ heightCard;
     final maxCards = columnCount * maxRow;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -43,9 +45,16 @@ class MainScreen extends StatelessWidget {
         create: (_) => PokemonPaginateCubit(
           context.read<PokemonRepository>(),
         )..getPokemonPage(maxCards),
-        child: PokemonsContainer(
-          columnCount: columnCount,
-          maxCards: maxCards,
+        child: ResponsiveLayout(
+          mobileBody: PokemonsContainer(
+            columnCount: columnCount,
+            maxCards: maxCards,
+          ),
+          desktopBody: PokemonsContainer(
+            columnCount: columnCount,
+            maxCards: maxCards,
+            isDesktop: true,
+          ),
         ),
       ),
     );
