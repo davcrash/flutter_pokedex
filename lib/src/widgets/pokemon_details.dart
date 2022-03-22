@@ -93,7 +93,7 @@ class PokemonDetails extends StatelessWidget {
             ],
           );
         }
-        return Text("ERROR");
+        return Container(); //TODO
       },
     );
   }

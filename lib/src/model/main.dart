@@ -78,6 +78,10 @@ class PokemonPaginationResult {
 
   String toRawJson() => json.encode(toJson());
 
+  factory PokemonPaginationResult.fromSpecies(Species species) {
+    return PokemonPaginationResult.fromJson(species.toJson());
+  }
+
   factory PokemonPaginationResult.fromJson(Map<String, dynamic> json) {
     final String url = json["url"];
     final splitUrl = url.split("/");
@@ -934,4 +938,766 @@ class Type {
         "slot": slot,
         "type": type!.toJson(),
       };
+}
+
+class PokemonSpecie {
+  PokemonSpecie({
+    required this.baseHappiness,
+    required this.captureRate,
+    required this.color,
+    required this.eggGroups,
+    required this.evolutionChain,
+    required this.evolvesFromSpecies,
+    required this.flavorTextEntries,
+    required this.formDescriptions,
+    required this.formsSwitchable,
+    required this.genderRate,
+    required this.genera,
+    required this.generation,
+    required this.growthRate,
+    required this.habitat,
+    required this.hasGenderDifferences,
+    required this.hatchCounter,
+    required this.id,
+    required this.isBaby,
+    required this.isLegendary,
+    required this.isMythical,
+    required this.name,
+    required this.names,
+    required this.order,
+    required this.palParkEncounters,
+    required this.pokedexNumbers,
+    required this.shape,
+    required this.varieties,
+  });
+  late final int baseHappiness;
+  late final int captureRate;
+  late final PokemonColor color;
+  late final List<EggGroups> eggGroups;
+  late final EvolutionChain evolutionChain;
+  late final EvolvesFromSpecies? evolvesFromSpecies;
+  late final List<FlavorTextEntries> flavorTextEntries;
+  late final List<dynamic> formDescriptions;
+  late final bool formsSwitchable;
+  late final int genderRate;
+  late final List<Genera> genera;
+  late final Generation generation;
+  late final GrowthRate growthRate;
+  late final Habitat habitat;
+  late final bool hasGenderDifferences;
+  late final int hatchCounter;
+  late final int id;
+  late final bool isBaby;
+  late final bool isLegendary;
+  late final bool isMythical;
+  late final String name;
+  late final List<Names> names;
+  late final int order;
+  late final List<PalParkEncounters> palParkEncounters;
+  late final List<PokedexNumbers> pokedexNumbers;
+  late final Shape shape;
+  late final List<Varieties> varieties;
+
+  factory PokemonSpecie.fromRawJson(String str) =>
+      PokemonSpecie.fromJson(json.decode(str));
+
+  PokemonSpecie.fromJson(Map<String, dynamic> json) {
+    baseHappiness = json['base_happiness'];
+    captureRate = json['capture_rate'];
+    color = PokemonColor.fromJson(json['color']);
+    eggGroups = List.from(json['egg_groups'])
+        .map((e) => EggGroups.fromJson(e))
+        .toList();
+    evolutionChain = EvolutionChain.fromJson(json['evolution_chain']);
+    evolvesFromSpecies = json['evolves_from_species'] != null
+        ? EvolvesFromSpecies.fromJson(json['evolves_from_species'])
+        : null;
+    flavorTextEntries = List.from(json['flavor_text_entries'])
+        .map((e) => FlavorTextEntries.fromJson(e))
+        .toList();
+    formDescriptions =
+        List.castFrom<dynamic, dynamic>(json['form_descriptions']);
+    formsSwitchable = json['forms_switchable'];
+    genderRate = json['gender_rate'];
+    genera = List.from(json['genera']).map((e) => Genera.fromJson(e)).toList();
+    generation = Generation.fromJson(json['generation']);
+    growthRate = GrowthRate.fromJson(json['growth_rate']);
+    habitat = Habitat.fromJson(json['habitat']);
+    hasGenderDifferences = json['has_gender_differences'];
+    hatchCounter = json['hatch_counter'];
+    id = json['id'];
+    isBaby = json['is_baby'];
+    isLegendary = json['is_legendary'];
+    isMythical = json['is_mythical'];
+    name = json['name'];
+    names = List.from(json['names']).map((e) => Names.fromJson(e)).toList();
+    order = json['order'];
+    palParkEncounters = List.from(json['pal_park_encounters'])
+        .map((e) => PalParkEncounters.fromJson(e))
+        .toList();
+    pokedexNumbers = List.from(json['pokedex_numbers'])
+        .map((e) => PokedexNumbers.fromJson(e))
+        .toList();
+    shape = Shape.fromJson(json['shape']);
+    varieties =
+        List.from(json['varieties']).map((e) => Varieties.fromJson(e)).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['base_happiness'] = baseHappiness;
+    _data['capture_rate'] = captureRate;
+    _data['color'] = color.toJson();
+    _data['egg_groups'] = eggGroups.map((e) => e.toJson()).toList();
+    _data['evolution_chain'] = evolutionChain.toJson();
+    _data['evolves_from_species'] = evolvesFromSpecies;
+    _data['flavor_text_entries'] =
+        flavorTextEntries.map((e) => e.toJson()).toList();
+    _data['form_descriptions'] = formDescriptions;
+    _data['forms_switchable'] = formsSwitchable;
+    _data['gender_rate'] = genderRate;
+    _data['genera'] = genera.map((e) => e.toJson()).toList();
+    _data['generation'] = generation.toJson();
+    _data['growth_rate'] = growthRate.toJson();
+    _data['habitat'] = habitat.toJson();
+    _data['has_gender_differences'] = hasGenderDifferences;
+    _data['hatch_counter'] = hatchCounter;
+    _data['id'] = id;
+    _data['is_baby'] = isBaby;
+    _data['is_legendary'] = isLegendary;
+    _data['is_mythical'] = isMythical;
+    _data['name'] = name;
+    _data['names'] = names.map((e) => e.toJson()).toList();
+    _data['order'] = order;
+    _data['pal_park_encounters'] =
+        palParkEncounters.map((e) => e.toJson()).toList();
+    _data['pokedex_numbers'] = pokedexNumbers.map((e) => e.toJson()).toList();
+    _data['shape'] = shape.toJson();
+    _data['varieties'] = varieties.map((e) => e.toJson()).toList();
+    return _data;
+  }
+}
+
+class EvolvesFromSpecies {
+  EvolvesFromSpecies({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  EvolvesFromSpecies.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class PokemonColor {
+  PokemonColor({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  PokemonColor.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class EggGroups {
+  EggGroups({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  EggGroups.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class EvolutionChain {
+  EvolutionChain({
+    required this.url,
+  });
+  late final String url;
+
+  EvolutionChain.fromJson(Map<String, dynamic> json) {
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class FlavorTextEntries {
+  FlavorTextEntries({
+    required this.flavorText,
+    required this.language,
+    required this.version,
+  });
+  late final String flavorText;
+  late final Language language;
+  late final Version version;
+
+  FlavorTextEntries.fromJson(Map<String, dynamic> json) {
+    flavorText = json['flavor_text'];
+    language = Language.fromJson(json['language']);
+    version = Version.fromJson(json['version']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['flavor_text'] = flavorText;
+    _data['language'] = language.toJson();
+    _data['version'] = version.toJson();
+    return _data;
+  }
+}
+
+class Language {
+  Language({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Language.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class Version {
+  Version({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Version.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class Genera {
+  Genera({
+    required this.genus,
+    required this.language,
+  });
+  late final String genus;
+  late final Language language;
+
+  Genera.fromJson(Map<String, dynamic> json) {
+    genus = json['genus'];
+    language = Language.fromJson(json['language']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['genus'] = genus;
+    _data['language'] = language.toJson();
+    return _data;
+  }
+}
+
+class Generation {
+  Generation({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Generation.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class GrowthRate {
+  GrowthRate({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  GrowthRate.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class Habitat {
+  Habitat({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Habitat.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class Names {
+  Names({
+    required this.language,
+    required this.name,
+  });
+  late final Language language;
+  late final String name;
+
+  Names.fromJson(Map<String, dynamic> json) {
+    language = Language.fromJson(json['language']);
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['language'] = language.toJson();
+    _data['name'] = name;
+    return _data;
+  }
+}
+
+class PalParkEncounters {
+  PalParkEncounters({
+    required this.area,
+    required this.baseScore,
+    required this.rate,
+  });
+  late final Area area;
+  late final int baseScore;
+  late final int rate;
+
+  PalParkEncounters.fromJson(Map<String, dynamic> json) {
+    area = Area.fromJson(json['area']);
+    baseScore = json['base_score'];
+    rate = json['rate'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['area'] = area.toJson();
+    _data['base_score'] = baseScore;
+    _data['rate'] = rate;
+    return _data;
+  }
+}
+
+class Area {
+  Area({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Area.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class PokedexNumbers {
+  PokedexNumbers({
+    required this.entryNumber,
+    required this.pokedex,
+  });
+  late final int entryNumber;
+  late final Pokedex pokedex;
+
+  PokedexNumbers.fromJson(Map<String, dynamic> json) {
+    entryNumber = json['entry_number'];
+    pokedex = Pokedex.fromJson(json['pokedex']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['entry_number'] = entryNumber;
+    _data['pokedex'] = pokedex.toJson();
+    return _data;
+  }
+}
+
+class Pokedex {
+  Pokedex({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Pokedex.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class Shape {
+  Shape({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Shape.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class Varieties {
+  Varieties({
+    required this.isDefault,
+    required this.pokemon,
+  });
+  late final bool isDefault;
+  late final PokemonData pokemon;
+
+  Varieties.fromJson(Map<String, dynamic> json) {
+    isDefault = json['is_default'];
+    pokemon = PokemonData.fromJson(json['pokemon']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['is_default'] = isDefault;
+    _data['pokemon'] = pokemon.toJson();
+    return _data;
+  }
+}
+
+class PokemonData {
+  PokemonData({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  PokemonData.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class PokemonEvolutionChain {
+  PokemonEvolutionChain({
+    this.babyTriggerItem,
+    required this.chain,
+    required this.id,
+  });
+  late final dynamic babyTriggerItem;
+  late final Chain chain;
+  late final int id;
+
+  factory PokemonEvolutionChain.fromRawJson(String str) =>
+      PokemonEvolutionChain.fromJson(json.decode(str));
+
+  PokemonEvolutionChain.fromJson(Map<String, dynamic> json) {
+    babyTriggerItem = null;
+    chain = Chain.fromJson(json['chain']);
+    id = json['id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['baby_trigger_item'] = babyTriggerItem;
+    _data['chain'] = chain.toJson();
+    _data['id'] = id;
+    return _data;
+  }
+}
+
+class Chain {
+  Chain({
+    required this.evolutionDetails,
+    required this.evolvesTo,
+    required this.isBaby,
+    required this.species,
+  });
+  late final List<dynamic> evolutionDetails;
+  late final List<EvolvesTo> evolvesTo;
+  late final bool isBaby;
+  late final Species species;
+
+  Chain.fromJson(Map<String, dynamic> json) {
+    evolutionDetails =
+        List.castFrom<dynamic, dynamic>(json['evolution_details']);
+    evolvesTo = List.from(json['evolves_to'])
+        .map((e) => EvolvesTo.fromJson(e))
+        .toList();
+    isBaby = json['is_baby'];
+    species = Species.fromJson(json['species']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['evolution_details'] = evolutionDetails;
+    _data['evolves_to'] = evolvesTo.map((e) => e.toJson()).toList();
+    _data['is_baby'] = isBaby;
+    _data['species'] = species.toJson();
+    return _data;
+  }
+}
+
+class EvolvesTo {
+  EvolvesTo({
+    required this.evolutionDetails,
+    required this.evolvesTo,
+    required this.isBaby,
+    required this.species,
+  });
+  late final List<EvolutionDetails> evolutionDetails;
+  late final List<EvolvesTo> evolvesTo;
+  late final bool isBaby;
+  late final Species species;
+
+  EvolvesTo.fromJson(Map<String, dynamic> json) {
+    evolutionDetails = List.from(json['evolution_details'])
+        .map((e) => EvolutionDetails.fromJson(e))
+        .toList();
+    evolvesTo = List.from(json['evolves_to'])
+        .map((e) => EvolvesTo.fromJson(e))
+        .toList();
+    isBaby = json['is_baby'];
+    species = Species.fromJson(json['species']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['evolution_details'] =
+        evolutionDetails.map((e) => e.toJson()).toList();
+    _data['evolves_to'] = evolvesTo.map((e) => e.toJson()).toList();
+    _data['is_baby'] = isBaby;
+    _data['species'] = species.toJson();
+    return _data;
+  }
+}
+
+class EvolutionDetails {
+  EvolutionDetails({
+    this.gender,
+    this.heldItem,
+    this.item,
+    this.knownMove,
+    this.knownMoveType,
+    this.location,
+    this.minAffection,
+    this.minBeauty,
+    this.minHappiness,
+    required this.minLevel,
+    required this.needsOverworldRain,
+    this.partySpecies,
+    this.partyType,
+    this.relativePhysicalStats,
+    required this.timeOfDay,
+    this.tradeSpecies,
+    required this.trigger,
+    required this.turnUpsideDown,
+  });
+  late final dynamic gender;
+  late final dynamic heldItem;
+  late final dynamic item;
+  late final dynamic knownMove;
+  late final dynamic knownMoveType;
+  late final dynamic location;
+  late final dynamic minAffection;
+  late final dynamic minBeauty;
+  late final dynamic minHappiness;
+  late final dynamic minLevel;
+  late final dynamic needsOverworldRain;
+  late final dynamic partySpecies;
+  late final dynamic partyType;
+  late final dynamic relativePhysicalStats;
+  late final String timeOfDay;
+  late final dynamic tradeSpecies;
+  late final Trigger trigger;
+  late final bool turnUpsideDown;
+
+  EvolutionDetails.fromJson(Map<String, dynamic> json) {
+    gender = null;
+    heldItem = null;
+    item = null;
+    knownMove = null;
+    knownMoveType = null;
+    location = null;
+    minAffection = null;
+    minBeauty = null;
+    minHappiness = null;
+    minLevel = null;
+    needsOverworldRain = null;
+    partySpecies = null;
+    partyType = null;
+    relativePhysicalStats = null;
+    timeOfDay = json['time_of_day'];
+    tradeSpecies = null;
+    trigger = Trigger.fromJson(json['trigger']);
+    turnUpsideDown = json['turn_upside_down'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['gender'] = gender;
+    _data['held_item'] = heldItem;
+    _data['item'] = item;
+    _data['known_move'] = knownMove;
+    _data['known_move_type'] = knownMoveType;
+    _data['location'] = location;
+    _data['min_affection'] = minAffection;
+    _data['min_beauty'] = minBeauty;
+    _data['min_happiness'] = minHappiness;
+    _data['min_level'] = minLevel;
+    _data['needs_overworld_rain'] = needsOverworldRain;
+    _data['party_species'] = partySpecies;
+    _data['party_type'] = partyType;
+    _data['relative_physical_stats'] = relativePhysicalStats;
+    _data['time_of_day'] = timeOfDay;
+    _data['trade_species'] = tradeSpecies;
+    _data['trigger'] = trigger.toJson();
+    _data['turn_upside_down'] = turnUpsideDown;
+    return _data;
+  }
+}
+
+class Trigger {
+  Trigger({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Trigger.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
+}
+
+class Species {
+  Species({
+    required this.name,
+    required this.url,
+  });
+  late final String name;
+  late final String url;
+
+  Species.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['name'] = name;
+    _data['url'] = url;
+    return _data;
+  }
 }

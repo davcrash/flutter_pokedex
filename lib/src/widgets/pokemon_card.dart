@@ -8,16 +8,24 @@ class PokemonCard extends StatelessWidget {
   const PokemonCard({
     Key? key,
     required this.pokemonPaginationResult,
+    this.isFromDetails = false,
+    this.isClickeable = true,
   }) : super(key: key);
 
   final PokemonPaginationResult pokemonPaginationResult;
+  final bool isFromDetails;
+  final bool isClickeable;
 
   @override
   Widget build(BuildContext context) {
+    final heroTag = isFromDetails
+        ? "${pokemonPaginationResult.number}_details"
+        : pokemonPaginationResult.number;
     return MouseRegion(
-      cursor: SystemMouseCursors.click,
+      cursor: isClickeable ? SystemMouseCursors.click : MouseCursor.defer,
       child: GestureDetector(
         onTap: () {
+          if (!isClickeable) return;
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -35,7 +43,7 @@ class PokemonCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Hero(
-                  tag: pokemonPaginationResult.number,
+                  tag: heroTag,
                   child: Transform.scale(
                     scale: 1.2,
                     child: CachedNetworkImage(

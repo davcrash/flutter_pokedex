@@ -20,7 +20,7 @@ class PokemonStats extends StatelessWidget {
             type: state.pokemon.types!.first,
           );
         }
-        return Text("ERROR");
+        return Container(); //TODO
       },
     );
   }

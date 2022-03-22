@@ -4,6 +4,8 @@ import 'package:pokedex/src/model/main.dart';
 class PokemonApi {
   final _apiURL = "pokeapi.co";
   final _pokemonEndpoint = "/api/v2/pokemon";
+  final _pokemonSpecieEndpoint = "/api/v2/pokemon-species";
+  final _pokemonEvolutionChainEndpoint = "/api/v2/evolution-chain";
   final http.Client _httpClient;
 
   PokemonApi({
@@ -31,5 +33,19 @@ class PokemonApi {
     final response = await _httpClient.get(uri);
     final pokemon = Pokemon.fromRawJson(response.body);
     return pokemon;
+  }
+
+  Future<PokemonSpecie> getPokemonSpecie(int id) async {
+    final uri = Uri.https(_apiURL, "$_pokemonSpecieEndpoint/$id");
+    final response = await _httpClient.get(uri);
+    final specie = PokemonSpecie.fromRawJson(response.body);
+    return specie;
+  }
+
+  Future<PokemonEvolutionChain> getPokemonEvolutionChain(int id) async {
+    final uri = Uri.https(_apiURL, "$_pokemonEvolutionChainEndpoint/$id");
+    final response = await _httpClient.get(uri);
+    final evolution = PokemonEvolutionChain.fromRawJson(response.body);
+    return evolution;
   }
 }

@@ -18,5 +18,11 @@ class PokemonRepository {
     return await _pokemonApi.getPokemon(id);
   }
 
-  //TODO: https://stackoverflow.com/questions/69783976/how-to-fetch-the-data-of-evolution-chain-from-the-pokeapi
+  Future<PokemonSpecie> getPokemonSpecie(int id) async {
+    return await _pokemonApi.getPokemonSpecie(id);
+  }
+
+  Future<PokemonEvolutionChain> getPokemonEvolutionChain(int id) async {
+    return await _pokemonApi.getPokemonEvolutionChain(id);
+  }
 }
