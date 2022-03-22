@@ -31,10 +31,13 @@ class PokemonEvolutions extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     children: [
                       for (var i = 0; i < evolutions.length; i++)
-                        PokemonCard(
-                          isFromDetails: true,
-                          pokemonPaginationResult: evolutions[i],
-                          isClickeable: i != 0,
+                        SizedBox(
+                          width: 150,
+                          child: PokemonCard(
+                            isFromDetails: true,
+                            pokemonPaginationResult: evolutions[i],
+                            isClickeable: i != 0,
+                          ),
                         )
                     ],
                   ),
