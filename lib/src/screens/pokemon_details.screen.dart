@@ -60,7 +60,9 @@ class PokemonDetailsScreen extends StatelessWidget {
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   const PokemonDescription(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
-                  const PokemonEvolutions(),
+                  PokemonEvolutions(
+                    pokemonId: pokemonPaginationResult.number,
+                  ),
                   const Padding(padding: EdgeInsets.only(top: 100)),
                   const Padding(padding: EdgeInsets.only(top: 100)),
                   const Padding(padding: EdgeInsets.only(top: 100)),

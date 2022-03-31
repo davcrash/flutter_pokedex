@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/bloc/pokemon_evolution_chain/pokemon_evolution_chain_cubit.dart';
 import 'package:pokedex/src/model/main.dart';
+import 'package:pokedex/src/responsive/responsive_layout.dart';
 import 'package:pokedex/src/widgets/pokemon_card.dart';
 
 class PokemonEvolutions extends StatelessWidget {
-  const PokemonEvolutions({Key? key}) : super(key: key);
-
+  const PokemonEvolutions({Key? key, required this.pokemonId})
+      : super(key: key);
+  final String pokemonId;
+  final cardHeight = 200.0;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -24,22 +27,17 @@ class PokemonEvolutions extends StatelessWidget {
                   style: theme.textTheme.titleMedium!
                       .copyWith(color: theme.textTheme.caption!.color),
                 ),
-                SizedBox(
-                  height: 200,
-                  child: ListView(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      for (var i = 0; i < evolutions.length; i++)
-                        SizedBox(
-                          width: 150,
-                          child: PokemonCard(
-                            isFromDetails: true,
-                            pokemonPaginationResult: evolutions[i],
-                            isClickeable: i != 0,
-                          ),
-                        )
-                    ],
+                ResponsiveLayout(
+                  desktopBody: Wrap(
+                    alignment: WrapAlignment.center,
+                    children: getPokemonCardList(evolutions),
+                  ),
+                  mobileBody: SizedBox(
+                    height: cardHeight,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: getPokemonCardList(evolutions),
+                    ),
                   ),
                 ),
               ],
@@ -76,5 +74,21 @@ class PokemonEvolutions extends StatelessWidget {
         evolve.evolvesTo,
       );
     }
+  }
+
+  List<Widget> getPokemonCardList(List<PokemonPaginationResult> evolutions) {
+    return evolutions
+        .map(
+          (evolution) => SizedBox(
+            width: 150,
+            height: cardHeight,
+            child: PokemonCard(
+              isFromDetails: true,
+              pokemonPaginationResult: evolution,
+              isClickeable: evolution.number != pokemonId,
+            ),
+          ),
+        )
+        .toList();
   }
 }
