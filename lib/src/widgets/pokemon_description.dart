@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/bloc/pokemon_specie/pokemon_specie_cubit.dart';
+import 'package:pokedex/src/widgets/pokemon_description_skeleton.dart';
 
 class PokemonDescription extends StatelessWidget {
   const PokemonDescription({Key? key}) : super(key: key);
@@ -10,7 +11,9 @@ class PokemonDescription extends StatelessWidget {
     final theme = Theme.of(context);
     return BlocBuilder<PokemonSpecieCubit, PokemonSpecieState>(
       builder: (context, state) {
-        if (state is PokemonSpecieLoaded) {
+        if (state is PokemonSpecieLoading) {
+          return const PokemonDescriptionSkeleton();
+        } else if (state is PokemonSpecieLoaded) {
           //TODO: internationalization
           final texts = state.pokemonSpecie.flavorTextEntries
               .where(

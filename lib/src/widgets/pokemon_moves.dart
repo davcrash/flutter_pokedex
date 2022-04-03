@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:collection/collection.dart";
 import 'package:pokedex/src/model/main.dart';
+import 'package:pokedex/src/widgets/pokemon_moves_skeleton.dart';
 import 'package:pokedex/src/widgets/pokemon_moves_table.dart';
 import '../bloc/pokemon_details/pokemon_details_cubit.dart';
 
@@ -16,9 +17,8 @@ class PokemonMoves extends StatelessWidget {
     return BlocBuilder<PokemonDetailsCubit, PokemonDetailsState>(
       builder: (context, state) {
         if (state is PokemonDetailsLoading) {
-          //TODO:SKELETON
-        }
-        if (state is PokemonDetailsLoaded) {
+          return const PokemonMovesSkeleton();
+        } else if (state is PokemonDetailsLoaded) {
           final moves = state.pokemon.moves!
             ..sort((a, b) => a.versionGroupDetails!.first.levelLearnedAt!
                 .compareTo(b.versionGroupDetails!.first.levelLearnedAt!));

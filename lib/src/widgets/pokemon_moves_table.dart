@@ -63,19 +63,16 @@ class _MovesTableRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 100,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 120,
-            child: Text(move.move!.name!),
-          ),
-          Text(move.versionGroupDetails!.first.levelLearnedAt!.toString()),
-        ],
-      ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 120,
+          child: Text(move.move!.name!),
+        ),
+        Text(move.versionGroupDetails!.first.levelLearnedAt!.toString()),
+      ],
     );
   }
 }

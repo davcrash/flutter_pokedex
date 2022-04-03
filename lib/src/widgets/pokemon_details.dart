@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/widgets/pokemon_type.dart';
+import 'package:pokedex/src/widgets/skeleton_shape.dart';
 
 import '../bloc/pokemon_details/pokemon_details_cubit.dart';
 import '../model/main.dart' as models;
@@ -13,10 +14,7 @@ class PokemonDetails extends StatelessWidget {
     final theme = Theme.of(context);
     return BlocBuilder<PokemonDetailsCubit, PokemonDetailsState>(
       builder: (context, state) {
-        if (state is PokemonDetailsLoading) {
-          //TODO:SKELETON
-        }
-        if (state is PokemonDetailsLoaded) {
+        if (state is PokemonDetailsLoaded || state is PokemonDetailsLoading) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -27,18 +25,24 @@ class PokemonDetails extends StatelessWidget {
                     style: theme.textTheme.titleMedium!
                         .copyWith(color: theme.textTheme.caption!.color),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (var type in state.pokemon.types ?? <models.Type>[])
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 5,
-                          ),
-                          child: PokemonType(type: type),
+                  (state is PokemonDetailsLoaded)
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            for (var type
+                                in state.pokemon.types ?? <models.Type>[])
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
+                                child: PokemonType(type: type),
+                              )
+                          ],
                         )
-                    ],
-                  ),
+                      : const SkeletonShape(
+                          height: 40,
+                          width: 80,
+                        ),
                 ],
               ),
               const Padding(padding: EdgeInsets.only(right: 40)),
@@ -50,12 +54,25 @@ class PokemonDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "${state.pokemon.height}",
-                            style: theme.textTheme.headline5!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          (state is PokemonDetailsLoaded)
+                              ? Text(
+                                  "${state.pokemon.height}",
+                                  style: theme.textTheme.headline5!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : Column(
+                                  children: [
+                                    SkeletonShape(
+                                      height:
+                                          theme.textTheme.headline5!.fontSize,
+                                      width: 30,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    )
+                                  ],
+                                ),
                           Text(
                             "height",
                             style: theme.textTheme.titleMedium!.copyWith(
@@ -71,12 +88,25 @@ class PokemonDetails extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "${state.pokemon.weight}",
-                            style: theme.textTheme.headline5!.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          (state is PokemonDetailsLoaded)
+                              ? Text(
+                                  "${state.pokemon.weight}",
+                                  style: theme.textTheme.headline5!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : Column(
+                                  children: [
+                                    SkeletonShape(
+                                      height:
+                                          theme.textTheme.headline5!.fontSize,
+                                      width: 30,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    )
+                                  ],
+                                ),
                           Text(
                             "weight",
                             style: theme.textTheme.titleMedium!.copyWith(

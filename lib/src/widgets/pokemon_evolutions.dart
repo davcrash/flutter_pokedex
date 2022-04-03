@@ -4,6 +4,7 @@ import 'package:pokedex/src/bloc/pokemon_evolution_chain/pokemon_evolution_chain
 import 'package:pokedex/src/model/main.dart';
 import 'package:pokedex/src/responsive/responsive_layout.dart';
 import 'package:pokedex/src/widgets/pokemon_card.dart';
+import 'package:pokedex/src/widgets/pokemon_evolutions_skeleton.dart';
 
 class PokemonEvolutions extends StatelessWidget {
   const PokemonEvolutions({Key? key, required this.pokemonId})
@@ -15,7 +16,9 @@ class PokemonEvolutions extends StatelessWidget {
     final theme = Theme.of(context);
     return BlocBuilder<PokemonEvolutionChainCubit, PokemonEvolutionChainState>(
       builder: (context, state) {
-        if (state is PokemonEvolutionChainLoaded) {
+        if (state is PokemonEvolutionChainLoading) {
+          return const PokemonEvolutionsSkeleton();
+        } else if (state is PokemonEvolutionChainLoaded) {
           final evolutions = _formatEvolutions(
             state.pokemonEvolutionChain,
           );
@@ -30,13 +33,13 @@ class PokemonEvolutions extends StatelessWidget {
                 ResponsiveLayout(
                   desktopBody: Wrap(
                     alignment: WrapAlignment.center,
-                    children: getPokemonCardList(evolutions),
+                    children: _getPokemonCardList(evolutions),
                   ),
                   mobileBody: SizedBox(
                     height: cardHeight,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
-                      children: getPokemonCardList(evolutions),
+                      children: _getPokemonCardList(evolutions),
                     ),
                   ),
                 ),
@@ -76,7 +79,7 @@ class PokemonEvolutions extends StatelessWidget {
     }
   }
 
-  List<Widget> getPokemonCardList(List<PokemonPaginationResult> evolutions) {
+  List<Widget> _getPokemonCardList(List<PokemonPaginationResult> evolutions) {
     return evolutions
         .map(
           (evolution) => SizedBox(
