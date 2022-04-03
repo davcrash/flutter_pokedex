@@ -4,6 +4,7 @@ import 'package:pokedex/src/screens/details/widgets/pokemon_stats_skeleton.dart'
 import 'package:pokedex/src/screens/details/widgets/stats_graph.dart';
 
 import '../../../bloc/pokemon_details/pokemon_details_cubit.dart';
+import '../../../widgets/error_message.dart';
 
 class PokemonStats extends StatelessWidget {
   const PokemonStats({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class PokemonStats extends StatelessWidget {
             type: state.pokemon.types!.first,
           );
         }
-        return Container(); //TODO
+        return const ErrorMessage();
       },
     );
   }

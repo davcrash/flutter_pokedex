@@ -4,6 +4,8 @@ import 'package:pokedex/src/widgets/pokemon_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/widgets/pokemon_card_skeleton.dart';
 
+import '../../../widgets/error_message.dart';
+
 class PokemonsContainer extends StatefulWidget {
   const PokemonsContainer({
     Key? key,
@@ -40,6 +42,9 @@ class _PokemonsContainerState extends State<PokemonsContainer> {
   Widget build(BuildContext context) {
     return BlocBuilder<PokemonPaginateCubit, PokemonPaginateState>(
       builder: (context, state) {
+        if (state.pokemonList.isEmpty && state.errorMessage != null) {
+          return const Center(child: ErrorMessage());
+        }
         return GridView.builder(
           padding: EdgeInsets.symmetric(
             vertical: 10,

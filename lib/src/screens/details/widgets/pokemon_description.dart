@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/bloc/pokemon_specie/pokemon_specie_cubit.dart';
 import 'package:pokedex/src/screens/details/widgets/pokemon_description_skeleton.dart';
 
+import '../../../widgets/error_message.dart';
+
 class PokemonDescription extends StatelessWidget {
   const PokemonDescription({Key? key}) : super(key: key);
 
@@ -53,7 +55,7 @@ class PokemonDescription extends StatelessWidget {
             ],
           );
         }
-        return Container(); //TODO
+        return const ErrorMessage();
       },
     );
   }

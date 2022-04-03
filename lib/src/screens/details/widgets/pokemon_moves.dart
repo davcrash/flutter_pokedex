@@ -7,6 +7,7 @@ import 'package:pokedex/src/model/main.dart';
 import 'package:pokedex/src/screens/details/widgets/pokemon_moves_skeleton.dart';
 import 'package:pokedex/src/screens/details/widgets/pokemon_moves_table.dart';
 import '../../../bloc/pokemon_details/pokemon_details_cubit.dart';
+import '../../../widgets/error_message.dart';
 
 class PokemonMoves extends StatelessWidget {
   const PokemonMoves({Key? key}) : super(key: key);
@@ -46,7 +47,7 @@ class PokemonMoves extends StatelessWidget {
             ],
           );
         }
-        return Container(); //TODO
+        return const ErrorMessage();
       },
     );
   }

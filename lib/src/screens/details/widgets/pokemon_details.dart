@@ -5,6 +5,7 @@ import 'package:pokedex/src/widgets/skeleton_shape.dart';
 
 import '../../../bloc/pokemon_details/pokemon_details_cubit.dart';
 import '../../../model/main.dart' as models;
+import '../../../widgets/error_message.dart';
 
 class PokemonDetails extends StatelessWidget {
   const PokemonDetails({Key? key}) : super(key: key);
@@ -123,7 +124,7 @@ class PokemonDetails extends StatelessWidget {
             ],
           );
         }
-        return Container(); //TODO
+        return const ErrorMessage();
       },
     );
   }
