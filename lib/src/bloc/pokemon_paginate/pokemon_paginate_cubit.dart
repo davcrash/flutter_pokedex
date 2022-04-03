@@ -14,21 +14,35 @@ class PokemonPaginateCubit extends Cubit<PokemonPaginateState> {
   void getPokemonPage(int limit) async {
     if (state.isLoadingMore) return;
     if (!state.hasMore) return;
-    emit(state.copyWith(isLoadingMore: true));
-    final pagination = await _pokemonRepository.getPokemonList(
-      limit: limit,
-      offset: state.currentOffset,
-    );
-    final currentPokemonList = state.pokemonList;
-    final newPokemonList = [
-      ...currentPokemonList,
-      ...pagination.results,
-    ];
-    emit(state.copyWith(
-      isLoadingMore: false,
-      pokemonList: newPokemonList,
-      currentOffset: newPokemonList.length,
-      hasMore: pagination.next != null,
-    ));
+    try {
+      emit(state.copyWith(isLoadingMore: true));
+      final pagination = await _pokemonRepository.getPokemonList(
+        limit: limit,
+        offset: state.currentOffset,
+      );
+      final currentPokemonList = state.pokemonList;
+      final newPokemonList = [
+        ...currentPokemonList,
+        ...pagination.results,
+      ];
+      emit(
+        state.copyWith(
+          isLoadingMore: false,
+          pokemonList: newPokemonList,
+          currentOffset: newPokemonList.length,
+          hasMore: pagination.next != null,
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isLoadingMore: false,
+          pokemonList: state.pokemonList,
+          currentOffset: state.pokemonList.length,
+          hasMore: state.hasMore,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 }

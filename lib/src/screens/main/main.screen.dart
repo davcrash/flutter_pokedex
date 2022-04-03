@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/bloc/pokemon_paginate/pokemon_paginate_cubit.dart';
 import 'package:pokedex/src/repository/pokemon_repository.dart';
+import 'package:pokedex/src/screens/main/snackbar_listener.dart';
 import 'package:pokedex/src/screens/main/widgets/pokemons_container.dart';
 
 import '../../responsive/responsive_layout.dart';
@@ -45,15 +46,17 @@ class MainScreen extends StatelessWidget {
         create: (_) => PokemonPaginateCubit(
           context.read<PokemonRepository>(),
         )..getPokemonPage(maxCards),
-        child: ResponsiveLayout(
-          mobileBody: PokemonsContainer(
-            columnCount: columnCount,
-            maxCards: maxCards,
-          ),
-          desktopBody: PokemonsContainer(
-            columnCount: columnCount,
-            maxCards: maxCards,
-            isDesktop: true,
+        child: SnackBarListener(
+          child: ResponsiveLayout(
+            mobileBody: PokemonsContainer(
+              columnCount: columnCount,
+              maxCards: maxCards,
+            ),
+            desktopBody: PokemonsContainer(
+              columnCount: columnCount,
+              maxCards: maxCards,
+              isDesktop: true,
+            ),
           ),
         ),
       ),
