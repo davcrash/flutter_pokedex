@@ -95,10 +95,7 @@ class _StatsGraphState extends State<StatsGraph>
                           );
                         },
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 5.0),
-                        child: Text("${widget.stats[i].baseStat}"),
-                      ),
+                      Text("${widget.stats[i].baseStat}"),
                     ],
                   ),
                 ),
