@@ -44,6 +44,7 @@ class PokemonMovesTable extends StatelessWidget {
               ],
             ),
             ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: moves.length,
               itemBuilder: (context, i) {

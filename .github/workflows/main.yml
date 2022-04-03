@@ -17,7 +17,7 @@ jobs:
           channel: 'stable'
       - run: flutter config --enable-web
       - run: flutter pub get
-      - run: flutter build web --release --base-href '/flutter_pokedex/'
+      - run: flutter build web --web-renderer canvaskit --release --base-href '/flutter_pokedex/'
       - run: |
           cd build/web
           git init
