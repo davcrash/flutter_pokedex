@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/src/widgets/pokemon_stats_skeleton.dart';
-import 'package:pokedex/src/widgets/stats_graph.dart';
+import 'package:pokedex/src/screens/details/widgets/pokemon_stats_skeleton.dart';
+import 'package:pokedex/src/screens/details/widgets/stats_graph.dart';
 
-import '../bloc/pokemon_details/pokemon_details_cubit.dart';
+import '../../../bloc/pokemon_details/pokemon_details_cubit.dart';
 
 class PokemonStats extends StatelessWidget {
   const PokemonStats({Key? key}) : super(key: key);

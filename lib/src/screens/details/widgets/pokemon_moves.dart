@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:collection/collection.dart";
 import 'package:pokedex/src/model/main.dart';
-import 'package:pokedex/src/widgets/pokemon_moves_skeleton.dart';
-import 'package:pokedex/src/widgets/pokemon_moves_table.dart';
-import '../bloc/pokemon_details/pokemon_details_cubit.dart';
+import 'package:pokedex/src/screens/details/widgets/pokemon_moves_skeleton.dart';
+import 'package:pokedex/src/screens/details/widgets/pokemon_moves_table.dart';
+import '../../../bloc/pokemon_details/pokemon_details_cubit.dart';
 
 class PokemonMoves extends StatelessWidget {
   const PokemonMoves({Key? key}) : super(key: key);

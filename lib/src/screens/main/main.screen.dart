@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/bloc/pokemon_paginate/pokemon_paginate_cubit.dart';
 import 'package:pokedex/src/repository/pokemon_repository.dart';
-import 'package:pokedex/src/widgets/pokemons_container.dart';
+import 'package:pokedex/src/screens/main/widgets/pokemons_container.dart';
 
-import '../responsive/responsive_layout.dart';
-import '../widgets/pokeball.dart';
+import '../../responsive/responsive_layout.dart';
+import 'widgets/pokeball.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);

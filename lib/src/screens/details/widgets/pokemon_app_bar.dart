@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
-import '../bloc/pokemon_details/pokemon_details_cubit.dart';
-import '../model/main.dart';
+import '../../../bloc/pokemon_details/pokemon_details_cubit.dart';
+import '../../../model/main.dart';
 
 class PokemonAppBar extends StatefulWidget {
   const PokemonAppBar({Key? key, required this.pokemonPaginationResult})

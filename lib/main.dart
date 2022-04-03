@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/src/repository/pokemon_repository.dart';
-import 'package:pokedex/src/screens/main.screen.dart';
+import 'package:pokedex/src/screens/main/main.screen.dart';
 
 Future<void> main() {
   return BlocOverrides.runZoned(

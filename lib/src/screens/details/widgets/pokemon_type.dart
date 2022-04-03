@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
-import '../model/main.dart';
+import '../../../model/main.dart';
 
 class PokemonType extends StatelessWidget {
   const PokemonType({Key? key, required this.type}) : super(key: key);

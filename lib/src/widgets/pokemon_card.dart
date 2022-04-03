@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex/src/model/main.dart';
 import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
-import '../screens/pokemon_details.screen.dart';
+import '../screens/details/pokemon_details.screen.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({

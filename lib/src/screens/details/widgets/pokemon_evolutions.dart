@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/bloc/pokemon_evolution_chain/pokemon_evolution_chain_cubit.dart';
 import 'package:pokedex/src/model/main.dart';
 import 'package:pokedex/src/responsive/responsive_layout.dart';
+import 'package:pokedex/src/screens/details/widgets/pokemon_evolutions_skeleton.dart';
 import 'package:pokedex/src/widgets/pokemon_card.dart';
-import 'package:pokedex/src/widgets/pokemon_evolutions_skeleton.dart';
 
 class PokemonEvolutions extends StatelessWidget {
   const PokemonEvolutions({Key? key, required this.pokemonId})
