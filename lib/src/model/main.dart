@@ -983,7 +983,7 @@ class PokemonSpecie {
   late final List<Genera> genera;
   late final Generation generation;
   late final GrowthRate growthRate;
-  late final Habitat habitat;
+  late final Habitat? habitat;
   late final bool hasGenderDifferences;
   late final int hatchCounter;
   late final int id;
@@ -1022,7 +1022,8 @@ class PokemonSpecie {
     genera = List.from(json['genera']).map((e) => Genera.fromJson(e)).toList();
     generation = Generation.fromJson(json['generation']);
     growthRate = GrowthRate.fromJson(json['growth_rate']);
-    habitat = Habitat.fromJson(json['habitat']);
+    habitat =
+        json['habitat'] != null ? Habitat.fromJson(json['habitat']) : null;
     hasGenderDifferences = json['has_gender_differences'];
     hatchCounter = json['hatch_counter'];
     id = json['id'];
@@ -1059,7 +1060,7 @@ class PokemonSpecie {
     _data['genera'] = genera.map((e) => e.toJson()).toList();
     _data['generation'] = generation.toJson();
     _data['growth_rate'] = growthRate.toJson();
-    _data['habitat'] = habitat.toJson();
+    _data['habitat'] = habitat != null ? habitat!.toJson() : null;
     _data['has_gender_differences'] = hasGenderDifferences;
     _data['hatch_counter'] = hatchCounter;
     _data['id'] = id;
