@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/src/bloc/pokemon_details/pokemon_details_cubit.dart';
+import 'package:pokedex/src/widgets/pokemon_moves.dart';
 
 import '../bloc/pokemon_evolution_chain/pokemon_evolution_chain_cubit.dart';
 import '../bloc/pokemon_specie/pokemon_specie_cubit.dart';
@@ -63,35 +64,9 @@ class PokemonDetailsScreen extends StatelessWidget {
                   PokemonEvolutions(
                     pokemonId: pokemonPaginationResult.number,
                   ),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
-                  const Padding(padding: EdgeInsets.only(top: 100)),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  const PokemonMoves(),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
                 ],
               ),
             ),
