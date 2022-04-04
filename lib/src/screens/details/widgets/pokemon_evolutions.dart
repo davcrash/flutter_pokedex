@@ -38,6 +38,7 @@ class PokemonEvolutions extends StatelessWidget {
                   mobileBody: SizedBox(
                     height: cardHeight,
                     child: ListView(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       scrollDirection: Axis.horizontal,
                       children: _getPokemonCardList(evolutions),
                     ),
