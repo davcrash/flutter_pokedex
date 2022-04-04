@@ -15,9 +15,7 @@ class PokemonSpecieCubit extends Cubit<PokemonSpecieState> {
     try {
       final specie = await _pokemonRepository.getPokemonSpecie(id);
       emit(PokemonSpecieLoaded(specie));
-    } catch (e, s) {
-      print(s);
-      print(e);
+    } catch (e) {
       emit(PokemonSpecieFailure(e.toString()));
     }
   }
