@@ -3,7 +3,8 @@
 Flutter Pokedex with [Pokeapi](https://pokeapi.co/) and [flutter_bloc](https://bloclibrary.dev/#/) with skeleton and animations
 
 ## Demo
-https://github.com/davcrash/flutter_pokedex
+https://davcrash.github.io/flutter_pokedex/
+
 ## App preview
 ### Android
 <p float="left">
